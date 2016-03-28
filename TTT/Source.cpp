@@ -4,53 +4,66 @@ using namespace std;
 
 class TTT
 {
+private:
+	int array[3] [3];
+	int playtracker;
+
 public:
-	char array[3] [3];
-
-	
-	char resetarray(void);
-	char print(int, int, int, int);
-	int move(int, int, int, int);
-	void iswon(char);
+	void resetarray();
+	void print();
+	bool move(int row, int col);
+	int iswon();
 
 };
 
-char TTT::resetarray(void)
+void TTT::resetarray()
 {
-	cout << "A dash '-' means he block is unused." << endl;
-	char array[3][3] = { { -, -, -}; { -, -, -} };
-	cout << array << endl;
+	cout << "A dash '-' means the block is unused." << endl;
+	array[3][3] == { {"-", "-", "-" }; { "-", "-", "-" }; { "-", "-", "-" } };
+	playtracker = 1; // if this equals 1 then player 1's turn, if equals 2 then player 2s turn.
+
 };
 
-char TTT::print(int row1, int col1, int row2, int col2)
+void TTT::print()
 {
-	char array[3][3] = { { -, -, -}, { -, -, -} };
-	array[row1][col1] = x;
-	array[row2][col2] = 0;
-	cout << array << endl;
-	return array;
-
-
+	array[3][3];
+	for (int i = 0; i < 3; i++){
+		for (int j = 0; j < 3; j++){
+			cout << array[i][j] << "  ";
+		}
+		cout << endl;
+	}
 };
 
-int TTT::move(int, int, int, int)
+bool TTT::move(int row, int col)
 {
-	int row1;
-	int col1;
-	int row2;
-	int col2;
+	bool ans = true;
 
-	cout << "Player 1 enter the row number:" << endl;
-	cin >> row1;
-	cout << "Player 1 enter the column number:" << endl;
-	cin >> col1;
-	cout << "Player 2 enter the row number:" << endl;
-	cin >> row2;
-	cout << "Player 2 enter the column number:" << endl;
-	cin >> col2;
-	return row1, col1, row2, col2;
+	if (row < 0){
+		ans = false;
+	}if (row > 2){
+		ans = false;
+	}if (col < 0){
+		ans = false;
+	}if (col > 2){
+		ans = false;
+	}if (array[row][col] != "-"){
+		ans = false;
+	}
+	else {
+		if (playtracker == 1){
+			array[row][col] == "X";
+			playtracker== 2
+		}
+		if (playtracker == 2){
+			array[row][col] == "O";
+			playtracker == 1
+		}		
+	}
 
+	return ans;	
 };
+
 
 //void TTT::restart(char)
 //{
@@ -68,74 +81,124 @@ int TTT::move(int, int, int, int)
 	//}
 //};
 
-void TTT::iswon(char)
+int TTT::iswon()
 {
-	for (int i = 0; i < 3; i++){
-		for (int j = 0, j < 3; j++){
-			
-			if (array[i][j] = array[i][j + 1] = array[i][j + 2] = x){
-				cout << "Player 1 has won." << endl;
-				resetarray();
-			}
-			if (array[i][j] = array[i][j + 1] = array[i][j + 2] = 0){
-				cout << "Player 2 has won." << endl;
-				resetarray();
-			}
+	int ans = 3; //1-Player 1 won, 2- Player 2 won, 3- Draw
 
 			
-			if (array[i][j] = array[i + 1][j] = array[i + 2][j] = x){
-				cout << "Player 1 has won." << endl;
-				resetarray();
-			}
-			if (array[i][j] = array[i][j + 1] = array[i][j + 2] = 0){
-				cout << "Player 2 has won." << endl;
-				resetarray();
-			}
+	if (array[0][0] == array[0][1] && array[0][0] == array[0][2] && array[0][0] != "-"){
+		if (array[0][0] == "X"){
+			ans = 1;
+		}
+		if (array[0][0] == "0"){
+			ans = 2;
+		}
 
-			
-			if (array[i][j] = array[i + 1][j + 1] = array[i + 2][j + 2] = x){
-				cout << "Player 1 has won." << endl;
-				resetarray();
-			}
-			
-			if (array[i][j] = array[i + 1][j + 1] = array[i + 2][j + 2] = 0){
-				cout << "Player 2 has won." << endl;
-				resetarray();
-			}
-
-
-			if (array[i][j+2] = array[i + 1][j + 1] = array[i + 2][j] = x){
-				cout << "Player 1 has won." << endl; 
-				resetarray();
-			}
-			
-			if (array[i][j + 2] = array[i + 1][j + 1] = array[i + 2][j] = x){
-				cout << "Player 1 has won." << endl;
-				resetarray();
-			}
-			else {
-				cout << "The game is a draw." << endl;
-				resetarray();
-			}
-
-
+	}
+					
+	if (array[1][0] == array[1][1] && array[1][0] == array[1][1] && array[1][0] != "-"){
+		if (array[1][0] == "X"){
+			ans = 1;
+		}
+		if (array[1][0] == "0"){
+			ans = 2;
 		}
 	}
 
+	if (array[2][0] == array[2][1] && array[2][0] == array[2][2] && array[2][0] != "-"){
+		if (array[2][0] == "X"){
+			ans = 1;
+		}
+		if (array[2][0] == "0"){
+			ans = 2;
+		}
+	}
+
+			
+	if (array[0][0] == array[0][1] && array[0][0] == array[0][2] && array[0][0] != "-"){
+		if (array[0][0] == "X"){
+			ans = 1;
+		}
+		if (array[0][0] == "0"){
+			ans = 2;
+		}
+	}
+			
+	if (array[1][0] == array[1][1] && array[1][0] == array[1][2] && array[1][0] !=  "-"){
+		if (array[1][0] == "X"){
+			ans = 1;
+		}
+		if (array[1][0] == "0"){
+			ans = 2;
+		}
+	}
+
+
+	if (array[2][0] == array[2][1] && array[2][0] == array[2][2] && array[2][0] != "-"){
+		if (array[2][0] == "X"){
+			ans = 1;
+		}
+		if (array[2][0] == "0"){
+			ans = 2;
+		}
+	}
+			
+	if (array[0][0] == array[1][1] && array[0][0] == array[2][2] && array[0][0] !=  "-"){
+		if (array[0][0] == "X"){
+			ans = 1;
+		}
+		if (array[0][0] == "0"){
+			ans = 2;
+		}
+	}
+			
+	if (array[2][2] == array[1][1] && array[2][2] == array[1][1] && array[2][2] != "-"){
+		if (array[2][2] == "X"){
+			ans = 1;
+		}
+		if (array[2][2] == "0"){
+			ans = 2;
+		}
+	}
+
+	return ans;
 
 };
 
 int main()
 {
+	int row;
+	int col;
+	
 	TTT tttobject;
 	cout << "You're playing TicTacToe" << endl;
 	tttobject.resetarray();
-	tttobject.move(); 
 	tttobject.print();
-	tttobject.move();
-	tttobject.print();
-	tttobject.move();
-	tttobject.iswon();
 
+	int counter = 1;
+	while (counter <= 9 && tttobject.iswon != 3){
+		cout << "Player enter the row number:" << endl;
+		cin >> row;
+		cout << "Player enter the column number:" << endl;
+		cin >> col;
+		tttobject.move(row, col);
+		if (tttobject.move(row, col) == true){
+			counter += 1;
+			tttobject.print();
+		}
+		else {
+			cout << "Invalid numbers" << endl;
+		};
+	};
+
+	tttobject.iswon() == 1;
+	cout << "Player 1 has won" << endl;
+	tttobject.iswon() == 2;
+	cout << "Player 2 has won" << endl;
+	tttobject.iswon() == 3;
+	cout << "The match is a draw" << endl;
+	
+	tttobject.resetarray();
+		
 	return 0;
 };
